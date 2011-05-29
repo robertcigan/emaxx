@@ -12,11 +12,20 @@ gem 'uglifier'
 gem 'jquery-rails'
 
 gem 'devise'
+gem 'cancan'
 gem 'kaminari'
+gem 'userstamp'
 
-group :development, :test do
+group :development do
 	gem 'pry'
 	gem 'itslog'
-  gem 'rspec-rails', '~> 2.5'
-  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+end
+
+group :test do
+	gem 'pry'
+	gem 'itslog'
+	gem 'rspec-rails', '~> 2.5'
+	gem 'factory_girl_rails'
+	gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+	gem 'database_cleaner'
 end
