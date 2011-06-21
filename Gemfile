@@ -17,12 +17,7 @@ gem 'kaminari'
 gem 'userstamp'
 gem 'responders'
 
-group :development do
-	gem 'pry'
-	gem 'itslog'
-end
-
-group :test do
+group :test, :development do
 	gem 'pry'
 	gem 'itslog'
 	gem 'rspec-rails'
