@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc1'
+gem 'rails', '3.1.0.rc4'
 
 gem 'mysql2'
 
@@ -15,6 +15,7 @@ gem 'devise'
 gem 'cancan'
 gem 'kaminari'
 gem 'userstamp'
+gem 'responders'
 
 group :development do
 	gem 'pry'
@@ -24,8 +25,9 @@ end
 group :test do
 	gem 'pry'
 	gem 'itslog'
-	gem 'rspec-rails', '~> 2.5'
+	gem 'rspec-rails'
 	gem 'factory_girl_rails'
-	gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+	gem 'capybara'
 	gem 'database_cleaner'
+	gem 'launchy'
 end
