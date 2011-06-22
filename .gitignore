@@ -1,6 +1,6 @@
 .bundle
 db/*.sqlite3
-db/*.example
+config/database.yml
 log/*.log
 tmp/
 .sass-cache/

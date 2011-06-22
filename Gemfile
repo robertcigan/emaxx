@@ -18,6 +18,7 @@ gem 'userstamp'
 gem 'responders'
 
 group :test, :development do
+	gem 'sqlite3'
 	gem 'pry'
 	gem 'itslog'
 	gem 'rspec-rails'
