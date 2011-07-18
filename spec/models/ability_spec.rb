@@ -19,12 +19,13 @@ describe Ability do
     end
 
     it "does not read users" do
-      @ability.should_not be_able_to(:read, User)
+      @ability.should_not be_able_to(:read, User.new)
     end
     
     it 'does not manage users' do
-      @ability.should_not be_able_to(:manage, User)
+      @ability.should_not be_able_to(:manage, User.new)
     end
+    
   end
   
   describe 'guest' do

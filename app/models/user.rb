@@ -7,5 +7,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   model_stamper
   
-  validates :name, :presence => true, :uniqueness => true  
+  validates :name, :presence => true, :uniqueness => true
+  
+  attr_accessible :name, :email, :password, :password_confirmation  
 end

@@ -3,7 +3,7 @@ require 'spec_helper'
 feature 'users' do
   context 'as a guest' do
     scenario 'listing' do
-      visit users_path
+      visit('/users')
       current_path.should eq('/users/sign_in')
     end
   end

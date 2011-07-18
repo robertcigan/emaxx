@@ -36,5 +36,10 @@ feature 'site' do
       page.should have_link('Sign Out')
       page.should_not have_link('Sign In')
     end
+    
+    scenario 'sees a profile link' do
+      visit root_path
+      page.should have_link('Edit Account')
+    end
   end
 end

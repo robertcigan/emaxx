@@ -35,4 +35,31 @@ describe User do
       end
     end
   end
+  
+  describe 'mass assigment protection' do
+    it 'allows name' do
+      @user.attributes = { :name => 'changed' }
+      expect { @user.reload }.to change{ @user.name }
+    end
+    
+    it 'allows email' do
+      @user.attributes = { :email => 'changed@example.com' }
+      expect { @user.reload }.to change{ @user.email }
+    end
+    
+    it 'does not allow admin' do
+      @user.attributes = { :admin => true }
+      expect { @user.reload }.to_not change{ @user.admin }
+    end
+    
+    it 'allows password' do
+      @user.attributes = { :password => 'secretsecret' }
+      @user.password.should eq('secretsecret')
+    end
+    
+    it 'allows password confirmation' do
+      @user.attributes = { :password_confirmation => 'secretsecret' }
+      @user.password_confirmation.should eq('secretsecret')
+    end
+  end
 end

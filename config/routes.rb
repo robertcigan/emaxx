@@ -6,6 +6,8 @@ Emaxx::Application.routes.draw do
 
   resources :pages
   
+  resource :profile, :only => [:show, :edit, :update]
+  
   root :to => 'site#index' 
 
   # The priority is based upon order of creation:
