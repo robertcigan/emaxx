@@ -18,3 +18,8 @@ Factory.define :admin, :parent => :user do |f|
   f.email 'admin@example.com'
   f.admin true
 end
+
+Factory.define :page do |f|
+  f.title 'Great news'
+  f.content 'This is a great post whatsoever'
+end

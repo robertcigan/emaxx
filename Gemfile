@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.0.rc4'
 
-gem 'mysql2'
+gem 'mysql2', '0.2.7'
 
 # Asset template engines
 gem 'sass'
@@ -16,6 +16,8 @@ gem 'cancan'
 gem 'kaminari'
 gem 'userstamp'
 gem 'responders'
+
+gem 'friendly_id', '~> 3.2.1'
 
 group :test, :development do
 	gem 'sqlite3'
