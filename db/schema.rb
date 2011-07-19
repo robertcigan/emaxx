@@ -10,20 +10,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110528211152) do
+ActiveRecord::Schema.define(:version => 20110719185138) do
 
   create_table "pages", :force => true do |t|
     t.string   "title"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "cached_slug"
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "email"
-    t.boolean  "admin"
+  add_index "pages", ["cached_slug"], :name => "index_pages_on_cached_slug", :unique => true
+
+  create_table "slugs", :force => true do |t|
     t.string   "name"
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.integer  "sluggable_id"
+    t.integer  "sequence",                     :default => 1, :null => false
+    t.string   "sluggable_type", :limit => 40
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
+  add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                                                    :null => false
+    t.boolean  "admin",                                 :default => false
+    t.string   "name",                                                     :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

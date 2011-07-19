@@ -64,7 +64,7 @@ GEM
       factory_girl (~> 1.3)
       railties (>= 3.0.0)
     ffi (1.0.9)
-    friendly_id (3.2.1.1)
+    friendly_id (3.3.0.alpha2)
       babosa (~> 0.3.0)
     growl (1.0.3)
     guard (0.5.1)
@@ -93,7 +93,7 @@ GEM
       ruby_parser (>= 2.0.5)
     mime-types (1.16)
     multi_json (1.0.3)
-    mysql2 (0.2.7)
+    mysql2 (0.3.6)
     nokogiri (1.5.0)
     orm_adapter (0.0.5)
     polyglot (0.3.1)
@@ -186,7 +186,7 @@ DEPENDENCIES
   database_cleaner
   devise
   factory_girl_rails
-  friendly_id (~> 3.2.1)
+  friendly_id (= 3.3.0.alpha2)
   growl
   guard-rspec
   guard-spork
@@ -194,7 +194,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy
-  mysql2 (= 0.2.7)
+  mysql2 (= 0.3.6)
   pry
   rails (= 3.1.0.rc4)
   rb-fsevent
