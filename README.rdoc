@@ -1,0 +1,5 @@
+== Emaxx
+
+Is a open-source, free to use, free to modify, free to contribute, free to fork, blogging application
+
+Current master build status http://travis-ci.org/robertcigan/emaxx.png
