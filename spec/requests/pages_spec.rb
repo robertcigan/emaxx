@@ -28,6 +28,8 @@ feature "pages" do
     
     scenario 'listing' do
       visit('/pages')
+      page.should have_css('table tr td', :text => 'Happy Easter')
+      page.should have_css('table tr td', :text => '2010-01-01 08:00:00 UTC')      
       page.should have_css('table tr td a', :text => 'Show', :count => 2)
       page.should have_css('table tr td a', :text => 'Edit', :count => 2)
       page.should have_css('table tr td a', :text => 'Destroy', :count => 2)
@@ -38,6 +40,8 @@ feature "pages" do
       click_link('Edit')
       page.should have_content('Editing page')
       find_field('Title').value.should eq('Happy Easter')
+      find_field('page_publish_at_1i').value.should eq('2010')
+      find_field('Content').value.should eq('This is a great post whatsoever')
     end
       
     scenario 'updating with valid data' do
@@ -45,6 +49,7 @@ feature "pages" do
       click_link('Edit')
       within('form') do
         fill_in 'Title', :with => 'Changed'
+        select('2011', :from => 'page_publish_at_1i')
         click_button 'Update'
       end
       page.should have_content('Page was successfully updated')

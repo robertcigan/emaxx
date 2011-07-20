@@ -22,4 +22,5 @@ end
 Factory.define :page do |f|
   f.title 'Great news'
   f.content 'This is a great post whatsoever'
+  f.publish_at '2010-01-01 8:00:00'
 end
