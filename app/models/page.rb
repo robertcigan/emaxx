@@ -9,4 +9,13 @@ class Page < ActiveRecord::Base
   attr_accessible :title, :content, :publish_at
   
   scope :published, lambda { where("publish_at <= ?", Time.zone.now) }
+  
+  before_save :generate_html
+  
+  def generate_html
+    if self.content_changed?
+      markdown = Redcarpet.new(self.content)
+      self.html_content = markdown.to_html
+    end
+  end
 end

@@ -25,6 +25,11 @@ describe Page do
       expect { @page.reload }.to change{ @page.content }
     end
     
+    it 'does not allow html_content' do
+      @page.attributes = { :html_content => 'changed' }
+      expect { @page.reload }.to_not change{ @page.html_content }
+    end
+    
     it 'allows publish_date' do
       @page.attributes = { :publish_at => '2011-05-01 10:00:00' }
       expect { @page.reload }.to change{ @page.publish_at }
@@ -52,5 +57,16 @@ describe Page do
     it 'return only published page' do
       Page.published.count.should eq(1)
     end  
-  end    
+  end
+  
+  describe '#generate_html' do
+    it 'is created from content' do
+      @page.content = 'New content'
+      expect{ @page.generate_html }.to change{ @page.html_content }.to("<p>New content</p>\n")
+    end
+    
+    it 'is called before each save' do
+      expect{ @page.update_attribute(:content, 'New content') }.to change{ @page.html_content }.to("<p>New content</p>\n")
+    end
+  end
 end

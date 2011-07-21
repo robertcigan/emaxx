@@ -16,6 +16,7 @@ gem 'cancan'
 gem 'kaminari'
 gem 'userstamp'
 gem 'responders'
+gem 'redcarpet'
 
 gem 'friendly_id', '3.3.0.alpha2'
 
