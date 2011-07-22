@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 feature "pages" do
+  background do
+    @page = Factory(:page, :title => 'Happy Easter', :content => 'Bunny the Rabbit is somewhere in your garden')
+  end
+  
   context 'as a guest' do
     scenario 'listing' do
       visit('/pages')
@@ -21,7 +25,6 @@ feature "pages" do
   
   context 'as an admin' do
     background do
-      @page = Factory(:page, :title => 'Happy Easter')
       Factory(:page)
       login_as Factory(:admin)
     end
@@ -41,7 +44,7 @@ feature "pages" do
       page.should have_content('Editing page')
       find_field('Title').value.should eq('Happy Easter')
       find_field('page_publish_at_1i').value.should eq('2010')
-      find_field('Content').value.should eq('This is a great post whatsoever')
+      find_field('Content').value.should eq('Bunny the Rabbit is somewhere in your garden')
     end
       
     scenario 'updating with valid data' do
@@ -73,5 +76,49 @@ feature "pages" do
       page.should have_content('Page was successfully destroyed')
       expect { @page.reload }.to raise_error(ActiveRecord::RecordNotFound)
     end
+    
+    context 'showing page' do
+      scenario 'has manage links for admin' do
+        visit('/pages/happy-easter')
+        within('div.content') do
+          page.should have_link('Edit')
+        end
+      end
+    end
   end
+  
+  context 'as a user' do
+    background do
+      @page = Factory(:page, :title => 'Happy Easter')
+      Factory(:page)
+      login_as Factory(:admin)
+    end
+    
+    context 'showing page' do
+      scenario 'has no manage links for user' do
+        login_as(Factory(:user, :email => 'user@example.com'))
+        visit('/pages/happy-easter')
+        within('div.content') do
+          page.should have_no_link('Edit')
+          page.should have_no_link('Destroy')
+        end
+      end
+      
+      scenario 'has manage links for admin' do
+        visit('/pages/happy-easter')
+        within('div.content') do
+          page.should have_link('Edit')
+        end
+      end
+
+      scenario 'showing page' do
+        visit('/pages/happy-easter')
+        within('div.content') do
+          page.should have_css('h1', :text => 'Happy Easter')
+          page.should have_content("Bunny the Rabbit is somewhere in your garden")
+        end
+      end
+    end
+  end
+  
 end
