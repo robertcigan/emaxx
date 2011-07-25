@@ -8,7 +8,7 @@ class Page < ActiveRecord::Base
   validates :title, :presence => true
   attr_accessible :title, :content, :publish_at
   
-  scope :published, lambda { where("publish_at <= ?", Time.zone.now) }
+  scope :published, lambda { where("publish_at <= ?", Time.zone.now).order("publish_at desc") }
   
   before_save :generate_html
   

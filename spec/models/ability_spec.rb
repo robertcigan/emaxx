@@ -10,6 +10,10 @@ describe Ability do
     it "manages users" do
       @ability.should be_able_to(:manage, User)
     end
+    
+    it "manages pages" do
+      @ability.should be_able_to(:manage, Page)
+    end
   end
 
   describe "user" do
@@ -19,13 +23,20 @@ describe Ability do
     end
 
     it "does not read users" do
-      @ability.should_not be_able_to(:read, User.new)
+      @ability.should_not be_able_to(:read, User)
     end
     
     it 'does not manage users' do
-      @ability.should_not be_able_to(:manage, User.new)
+      @ability.should_not be_able_to(:manage, User)
     end
     
+    it 'does not manage pages' do
+      @ability.should_not be_able_to(:manage, Page)
+    end
+    
+    it "does read pages" do
+      @ability.should be_able_to(:read, Page)
+    end
   end
   
   describe 'guest' do
@@ -39,6 +50,14 @@ describe Ability do
     
     it "does not manage users" do
       @ability.should_not be_able_to(:manage, User)
+    end
+    
+    it 'does not manage pages' do
+      @ability.should_not be_able_to(:manage, Page)
+    end
+    
+    it "does read pages" do
+      @ability.should be_able_to(:read, Page)
     end
   end
 end

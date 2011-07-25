@@ -1,5 +1,6 @@
-<h1><%= @page.title %><h1>
+<%= link_to 'Edit', edit_page_path(@page) if can? :edit, @page %> |
+<%= link_to 'Destroy', page_path(@page), :method => :delete, :confirm => "Are you sure?" if can? :destroy, @page %>
+
+<h1><%= @page.title %></h1>
 
 <%= @page.html_content %>
-
-<%= link_to 'Edit', edit_page_path(@page) %>

@@ -1,9 +1,10 @@
 class PagesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:show, :index]
   load_and_authorize_resource 
   
   # GET /pages
   def index
+    @pages = @pages
     respond_with(@pages)
   end
 

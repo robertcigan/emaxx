@@ -2,12 +2,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.nil? #guest
-      # more to be added later
-    elsif user.admin?
+    if user && user.admin?
       can :manage, :all
     else
-      # user permission
+      can :read, Page, ["publish_at <= ?", Time.zone.now] do |page|
+        page.publish_at <= Time.zone.now
+      end
     end
   end
 end

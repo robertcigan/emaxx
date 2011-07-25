@@ -8,18 +8,20 @@ feature "pages" do
   context 'as a guest' do
     scenario 'listing' do
       visit('/pages')
-      current_path.should eq('/users/sign_in')
+      current_path.should eq('/pages')
+      page.should have_css('strong', :text => 'Happy Easter')
     end
   end
   
-  context 'as a page' do
+  context 'as a user' do
     background do
       login_as Factory(:user)
     end
     
     scenario 'listing' do
       visit('/pages')
-      page.should have_content 'You are not authorized to access this page.'
+      current_path.should eq('/pages')
+      page.should have_css('strong', :text => 'Happy Easter')
     end
   end
   
@@ -31,11 +33,9 @@ feature "pages" do
     
     scenario 'listing' do
       visit('/pages')
-      page.should have_css('table tr td', :text => 'Happy Easter')
-      page.should have_css('table tr td', :text => '2010-01-01 08:00:00 UTC')      
-      page.should have_css('table tr td a', :text => 'Show', :count => 2)
-      page.should have_css('table tr td a', :text => 'Edit', :count => 2)
-      page.should have_css('table tr td a', :text => 'Destroy', :count => 2)
+      current_path.should eq('/pages')
+      page.should have_css('strong', :text => 'Happy Easter')
+      page.should have_link('New Page')
     end
     
     scenario 'editing' do
@@ -71,7 +71,7 @@ feature "pages" do
     end
     
     scenario 'destroying' do
-      visit('/pages')
+      visit('/pages/happy-easter')
       click_link('Destroy')
       page.should have_content('Page was successfully destroyed')
       expect { @page.reload }.to raise_error(ActiveRecord::RecordNotFound)
@@ -82,6 +82,7 @@ feature "pages" do
         visit('/pages/happy-easter')
         within('div.content') do
           page.should have_link('Edit')
+          page.should have_link('Destroy')
         end
       end
     end
