@@ -34,8 +34,12 @@ describe Ability do
       @ability.should_not be_able_to(:manage, Page)
     end
     
-    it "does read pages" do
-      @ability.should be_able_to(:read, Page)
+    it "read published pages" do
+      @ability.should be_able_to(:read, Factory(:page))
+    end
+    
+    it "does not read non published pages" do
+      @ability.should_not be_able_to(:read, Factory(:page, :publish_at => nil))
     end
   end
   
@@ -56,8 +60,12 @@ describe Ability do
       @ability.should_not be_able_to(:manage, Page)
     end
     
-    it "does read pages" do
-      @ability.should be_able_to(:read, Page)
+    it "read published pages" do
+      @ability.should be_able_to(:read, Factory(:page))
+    end
+    
+    it "does not read non published pages" do
+      @ability.should_not be_able_to(:read, Factory(:page, :publish_at => nil))
     end
   end
 end

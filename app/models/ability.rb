@@ -5,8 +5,8 @@ class Ability
     if user && user.admin?
       can :manage, :all
     else
-      can :read, Page, ["publish_at <= ?", Time.zone.now] do |page|
-        page.publish_at <= Time.zone.now
+      can :read, Page, ["publish_at AND publish_at <= ?", Time.zone.now] do |page|
+        page.publish_at && page.publish_at <= Time.zone.now
       end
     end
   end
