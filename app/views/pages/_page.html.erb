@@ -1,0 +1,5 @@
+<p class="page">
+	<strong><%= link_to(page.title, page) %></strong>
+	<%= page.publish_at %>
+	<%= link_to 'Edit', edit_page_path(page) if can? :edit, page%>
+</p>
