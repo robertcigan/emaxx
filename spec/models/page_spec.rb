@@ -39,6 +39,11 @@ describe Page do
       @page.attributes = { :cached_slug => 'changed' }
       expect { @page.reload }.to_not change{ @page.cached_slug }
     end
+    
+    it 'allows tag_list' do
+      @page.attributes = { :tag_list => 'changed' }
+      expect { @page.reload }.to change{ @page.tag_list }
+    end
   end
   
   describe '#to_param' do

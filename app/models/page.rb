@@ -1,4 +1,5 @@
 class Page < ActiveRecord::Base
+  acts_as_taggable_on :tags
   has_friendly_id :title, 
     :use_slug => true, 
     :approximate_ascii => true, 
@@ -6,7 +7,7 @@ class Page < ActiveRecord::Base
     :reserved_words => ["index", "new", "edit", "create", "page", "destroy", "update", "show"]
 
   validates :title, :presence => true
-  attr_accessible :title, :content, :publish_at
+  attr_accessible :title, :content, :publish_at, :tag_list
   
   scope :published, lambda { where("publish_at <= ?", Time.zone.now).order("publish_at desc") }
   

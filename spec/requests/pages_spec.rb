@@ -43,6 +43,7 @@ feature "pages" do
       click_link('Edit')
       page.should have_content('Editing page')
       find_field('Title').value.should eq('Happy Easter')
+      find_field('Tag list').value.should eq('news, worldwide')
       find_field('page_publish_at_1i').value.should eq('2010')
       find_field('Content').value.should eq('Bunny the Rabbit is somewhere in your garden')
     end
@@ -53,6 +54,7 @@ feature "pages" do
       within('form') do
         fill_in 'Title', :with => 'Changed'
         select('2011', :from => 'page_publish_at_1i')
+        fill_in('Tag list', :with => 'changed')
         click_button 'Update'
       end
       page.should have_content('Page was successfully updated')
@@ -81,6 +83,8 @@ feature "pages" do
       scenario 'has manage links for admin' do
         visit('/pages/happy-easter')
         within('div.content') do
+          page.should have_link('news')
+          page.should have_link('worldwide')
           page.should have_link('Edit')
           page.should have_link('Destroy')
         end

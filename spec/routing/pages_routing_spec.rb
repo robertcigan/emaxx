@@ -30,6 +30,9 @@ describe PagesController do
     it "routes to #destroy" do
       delete("/pages/1").should route_to("pages#destroy", :id => "1")
     end
-
+    
+    it "routes to #index with tags" do
+      delete("/tag/news").should route_to("pages#index", :tag => "news")
+    end
   end
 end

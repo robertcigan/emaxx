@@ -24,4 +24,5 @@ Factory.define :page do |f|
   f.content 'This is a great post whatsoever'
   f.publish_at '2010-01-01 8:00:00'
   f.html_content 'This is a great post whatsoever'
+  f.tag_list 'news, worldwide'
 end
