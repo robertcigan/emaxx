@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   
   # GET /users
   def index
+    @users = @users.page(params[:page])
     respond_with(@users)
   end
 

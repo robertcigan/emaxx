@@ -35,6 +35,16 @@ feature "pages" do
           page.should have_link('tag3')
         end
       end
+      
+      scenario 'has pagination' do
+        25.times { Factory(:page) }
+        visit('/pages')
+        within('nav.pagination') do
+          page.should have_css('span.current')
+          page.should have_link('2')
+          page.should have_link('Next')
+        end
+      end
     end
     
     context 'showing the page' do

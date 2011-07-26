@@ -4,10 +4,11 @@ class PagesController < ApplicationController
   
   # GET /pages
   def index
+    @tags = Page.tag_counts_on(:tags)
     if params[:tag]
       @pages = @pages.tagged_with(params[:tag])
     end
-    @tags = Page.tag_counts_on(:tags)
+    @pages = @pages.page(params[:page])
     respond_with(@pages)
   end
 

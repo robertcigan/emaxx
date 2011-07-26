@@ -25,11 +25,23 @@ feature 'users' do
       login_as Factory(:admin)
     end
     
-    scenario 'listing' do
-      visit('/users')
-      page.should have_css('table tr td a', :text => 'Show', :count => 2)
-      page.should have_css('table tr td a', :text => 'Edit', :count => 2)
-      page.should have_css('table tr td a', :text => 'Destroy', :count => 2)
+    context 'listing' do
+      scenario 'shows users' do
+        visit('/users')
+        page.should have_css('table tr td a', :text => 'Show', :count => 2)
+        page.should have_css('table tr td a', :text => 'Edit', :count => 2)
+        page.should have_css('table tr td a', :text => 'Destroy', :count => 2)
+      end
+      
+      scenario 'has pagination' do
+        25.times { Factory(:user) }
+        visit('/users')
+        within('nav.pagination') do
+          page.should have_css('span.current')
+          page.should have_link('2')
+          page.should have_link('Next')
+        end
+      end
     end
     
     scenario 'editing' do
