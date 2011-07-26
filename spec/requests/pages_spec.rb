@@ -6,10 +6,43 @@ feature "pages" do
   end
   
   context 'as a guest' do
-    scenario 'listing' do
-      visit('/pages')
-      current_path.should eq('/pages')
-      page.should have_css('strong', :text => 'Happy Easter')
+    context 'listing' do
+      scenario 'all pages' do
+        visit('/pages')
+        current_path.should eq('/pages')
+        page.should have_css('strong', :text => 'Happy Easter')
+        page.should have_no_link('New Page')
+      end
+      
+      scenario 'by a tag' do
+        Factory(:page, :title => 'Page1', :tag_list => 'tag1, tag2')
+        Factory(:page, :title => 'Page2', :tag_list => 'tag1')
+        Factory(:page, :title => 'Page3', :tag_list => 'tag3')
+        visit('/tag/tag1')
+        page.should have_css(:strong, :text => 'Page1')
+        page.should have_css(:strong, :text => 'Page2')
+        page.should have_no_css(:strong, :text => 'Page3')
+      end
+    end
+    
+    context 'showing the page' do
+      scenario 'has no manage links for user' do
+        visit('/pages/happy-easter')
+        within('div.content') do
+          page.should have_no_link('Edit')
+          page.should have_no_link('Destroy')
+          page.should have_link('news')
+          page.should have_link('worldwide')
+        end
+      end
+      
+      scenario 'has tag links' do
+        visit('/pages/happy-easter')
+        within('div.content') do
+          page.should have_link('news')
+          page.should have_link('worldwide')
+        end
+      end
     end
   end
   
@@ -22,6 +55,19 @@ feature "pages" do
       visit('/pages')
       current_path.should eq('/pages')
       page.should have_css('strong', :text => 'Happy Easter')
+      page.should have_no_link('New Page')
+    end
+    
+    context 'showing the page' do
+      scenario 'has no manage links for user' do
+        visit('/pages/happy-easter')
+        within('div.content') do
+          page.should have_no_link('Edit')
+          page.should have_no_link('Destroy')
+          page.should have_link('news')
+          page.should have_link('worldwide')
+        end
+      end
     end
   end
   
@@ -83,47 +129,10 @@ feature "pages" do
       scenario 'has manage links for admin' do
         visit('/pages/happy-easter')
         within('div.content') do
-          page.should have_link('news')
-          page.should have_link('worldwide')
           page.should have_link('Edit')
           page.should have_link('Destroy')
         end
       end
     end
   end
-  
-  context 'as a user' do
-    background do
-      @page = Factory(:page, :title => 'Happy Easter')
-      Factory(:page)
-      login_as Factory(:admin)
-    end
-    
-    context 'showing page' do
-      scenario 'has no manage links for user' do
-        login_as(Factory(:user, :email => 'user@example.com'))
-        visit('/pages/happy-easter')
-        within('div.content') do
-          page.should have_no_link('Edit')
-          page.should have_no_link('Destroy')
-        end
-      end
-      
-      scenario 'has manage links for admin' do
-        visit('/pages/happy-easter')
-        within('div.content') do
-          page.should have_link('Edit')
-        end
-      end
-
-      scenario 'showing page' do
-        visit('/pages/happy-easter')
-        within('div.content') do
-          page.should have_css('h1', :text => 'Happy Easter')
-          page.should have_content("Bunny the Rabbit is somewhere in your garden")
-        end
-      end
-    end
-  end
-  
 end

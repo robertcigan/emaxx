@@ -1,10 +1,17 @@
-<%= link_to 'Edit', edit_page_path(@page) if can? :edit, @page %> |
-<%= link_to 'Destroy', page_path(@page), :method => :delete, :confirm => "Are you sure?" if can? :destroy, @page %>
+<div class="control">
+	<%= link_to 'Edit', edit_page_path(@page) if can? :edit, @page %> |
+	<%= link_to 'Destroy', page_path(@page), :method => :delete, :confirm => "Are you sure?" if can? :destroy, @page %>
+</div>
 
 <h1><%= @page.title %></h1>
+
+<strong>Tags</strong>
 <ul>
 	<% @page.tags.each do |tag| %>
-		<%= link_to(tag, tag_path(:tag => tag.name)) %>
+		<li><%= link_to(tag, tag_path(:tag => tag.name)) %></li>
 	<% end %>
+</ul>
 
-<%= @page.html_content %>
+<div class="page-content">
+	<%= @page.html_content %>
+</div>

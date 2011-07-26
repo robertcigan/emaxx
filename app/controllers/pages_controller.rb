@@ -4,7 +4,9 @@ class PagesController < ApplicationController
   
   # GET /pages
   def index
-    @pages = @pages
+    if params[:tag]
+      @pages = @pages.tagged_with(params[:tag])
+    end
     respond_with(@pages)
   end
 
