@@ -2,4 +2,13 @@
 
 <%= link_to 'New Page', new_page_path if can? :create, Page %>
 
-<%= render @pages %>
+<div class="tag-cloud">
+	<strong>Tag cloud</strong>
+	<% tag_cloud(@tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class| %>
+	  <%= link_to(tag.name, tag_path(:tag => tag.name), :class => css_class) %>
+	<% end %>
+</div>
+
+<div class="pages">
+	<%= render @pages %>
+</div>

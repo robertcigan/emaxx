@@ -23,6 +23,18 @@ feature "pages" do
         page.should have_css(:strong, :text => 'Page2')
         page.should have_no_css(:strong, :text => 'Page3')
       end
+      
+      scenario 'shows tag cloud' do
+        Factory(:page, :tag_list => 'tag1')
+        Factory(:page, :tag_list => 'tag2')
+        Factory(:page, :tag_list => 'tag3')
+        visit('/pages')
+        within('.tag-cloud') do
+          page.should have_link('tag1')
+          page.should have_link('tag2')
+          page.should have_link('tag3')
+        end
+      end
     end
     
     context 'showing the page' do

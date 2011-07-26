@@ -7,6 +7,7 @@ class PagesController < ApplicationController
     if params[:tag]
       @pages = @pages.tagged_with(params[:tag])
     end
+    @tags = Page.tag_counts_on(:tags)
     respond_with(@pages)
   end
 

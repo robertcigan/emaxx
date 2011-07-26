@@ -64,6 +64,16 @@ describe Page do
     end  
   end
   
+  describe '#by_date' do
+    it 'return only published page' do
+      Page.delete_all
+      page1 = Factory(:page, :title => 'Published1', :publish_at => Time.zone.now - 2.years)
+      page2 = Factory(:page, :title => 'Published2', :publish_at => Time.zone.now - 1.year)
+      Page.by_date.first.should eq(page2)
+      Page.by_date.last.should eq(page1)
+    end  
+  end
+  
   describe '#generate_html' do
     it 'is created from content' do
       @page.content = 'New content'
