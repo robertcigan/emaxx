@@ -11,6 +11,7 @@ feature "pages" do
         visit('/pages')
         current_path.should eq('/pages')
         page.should have_css('strong', :text => 'Happy Easter')
+        page.should have_content('Bunny the Rabbit is somewhere in your garden')
         page.should have_no_link('New Page')
       end
       

@@ -1,7 +1,7 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
-guard 'spork' do
+guard 'spork', :test_unit => false do
   watch('config/application.rb')
   watch('config/environment.rb')
   watch(%r{^config/environments/.*\.rb$})
@@ -10,7 +10,7 @@ guard 'spork' do
   watch(%r{^spec/factories/(.+).rb})
 end
 
-guard 'rspec', :version => 2, :cli => '--format documentation', :all_on_start => false, :all_after_pass => false do
+guard 'rspec', :version => 2, :cli => '--drb --format documentation', :test_unit => false, :all_on_start => false, :all_after_pass => false do
   watch(%r{^spec/.+_spec\.rb})
   watch(%r{^lib/(.+)\.rb})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb') { "spec" }

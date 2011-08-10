@@ -44,6 +44,10 @@ describe Page do
       @page.attributes = { :tag_list => 'changed' }
       expect { @page.reload }.to change{ @page.tag_list }
     end
+    
+    it 'does not allow preview' do
+      expect { @page.attributes = { :preview => 'changed' } }.to_not change{ @page.preview }
+    end
   end
   
   describe '#to_param' do
@@ -82,6 +86,17 @@ describe Page do
     
     it 'is called before each save' do
       expect{ @page.update_attribute(:content, 'New content') }.to change{ @page.html_content }.to("<p>New content</p>\n")
+    end
+  end
+  
+  describe '#generate_preview' do
+    it 'is created from content' do
+      @page.html_content = '<strong>New content</strong> is always better than old one'
+      expect{ @page.generate_preview }.to change{ @page.preview }.to("<strong>New content</strong> is always better than old one")
+    end
+    
+    it 'is called before each save' do
+      expect{ @page.update_attribute(:content, "New *content* is always better") }.to change{ @page.preview }.to("<p>New <em>content</em> is always better</p>")
     end
   end
 end

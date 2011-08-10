@@ -12,12 +12,18 @@ class Page < ActiveRecord::Base
   scope :published, lambda { where("publish_at <= ?", Time.zone.now) }
   scope :by_date, order("publish_at DESC") 
   
-  before_save :generate_html
+  before_save :generate_html, :generate_preview
   
   def generate_html
     if self.content_changed?
       markdown = Redcarpet.new(self.content)
       self.html_content = markdown.to_html
+    end
+  end
+  
+  def generate_preview
+    if self.html_content_changed?
+      self.preview = HTML_Truncator.truncate(self.html_content, 50)
     end
   end
 end

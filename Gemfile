@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc4'
+gem 'rails', '3.1.0.rc5'
 
 gem 'mysql2', '0.3.6'
 
@@ -14,10 +14,12 @@ gem 'jquery-rails'
 gem 'acts-as-taggable-on'
 gem 'devise'
 gem 'cancan'
+gem "html_truncator", "~>0.2"
 gem 'kaminari'
 gem 'userstamp'
 gem 'responders'
 gem 'redcarpet'
+
 
 gem 'friendly_id', '3.3.0.alpha2'
 
