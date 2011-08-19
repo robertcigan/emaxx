@@ -32,7 +32,6 @@ group :test, :development do
 	gem 'capybara'
 	gem 'database_cleaner'
 	gem 'launchy'
-	gem 'therubyracer' # just to fix missing JS runtime for ExecJS
 	gem 'guard-rspec', :require => false
 	gem 'guard-spork', :require => false
 	gem 'rb-fsevent', :require => false
