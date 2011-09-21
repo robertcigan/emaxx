@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc6'
+gem 'rails', '3.1.0'
 
-gem 'mysql2', '0.3.6'
+gem 'mysql2'
 
 # Asset template engines
 gem 'sass'
