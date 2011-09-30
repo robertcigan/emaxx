@@ -50,6 +50,24 @@ describe Page do
     end
   end
   
+  describe 'association dependency of' do
+    describe 'photos' do
+      before do 
+        @photo = Factory(:photo, :page => @page)
+        Factory(:photo)
+      end
+      
+      it 'return photos' do
+        @page.photos.should eq([@photo])
+      end
+      
+      it 'deletes photos' do
+        @page.reload.destroy
+        expect { @photo.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
+  
   describe '#to_param' do
     it 'returns permalink' do
       @page.to_param.should eq('great-news')

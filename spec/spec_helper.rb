@@ -48,6 +48,10 @@ Spork.prefork do
     
     config.include Warden::Test::Helpers, :type => :request
     config.after(:each, :type => :request) { Warden.test_reset! }
+    config.after do
+      FileUtils.rm_rf(File.join(Rails.root, 'tmp', 'uploads'))
+      FileUtils.rm_rf(File.join(Rails.root, 'public', 'test_uploads'))
+    end
   end
 end
 

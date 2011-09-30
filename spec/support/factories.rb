@@ -6,7 +6,6 @@ Factory.sequence :name do |n|
   "User Name #{n}"
 end
 
-
 Factory.define :user do |f|
   f.name { Factory.next(:name) }
   f.email { Factory.next(:email) }
@@ -25,4 +24,9 @@ Factory.define :page do |f|
   f.publish_at '2010-01-01 8:00:00'
   f.html_content 'This is a great post whatsoever'
   f.tag_list 'news, worldwide'
+end
+
+Factory.define :photo do |f|
+  f.association :page
+  f.file { File.open(File.join(Rails.root, 'spec', 'files', 'test_image.jpg')) }
 end

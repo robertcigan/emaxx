@@ -5,6 +5,8 @@ class Page < ActiveRecord::Base
     :approximate_ascii => true, 
     :max_length => 50, 
     :reserved_words => ["index", "new", "edit", "create", "page", "destroy", "update", "show"]
+    
+  has_many :photos, :dependent => :destroy
 
   validates :title, :presence => true
   attr_accessible :title, :content, :publish_at, :tag_list

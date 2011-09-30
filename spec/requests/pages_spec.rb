@@ -157,5 +157,33 @@ feature "pages" do
         end
       end
     end
+    
+    context 'photos upload' do
+      background do 
+        @photo_path = File.join(Rails.root, 'spec', 'files', 'test_image.jpg')
+      end
+      
+      scenario 'uploads a photo' do
+        visit('/pages/happy-easter/edit')
+        within('form#new_photo') do
+          attach_file('File', @photo_path)
+          click_button 'Create Photo'
+        end
+        page.should have_content('Photo was successfully created.')
+        page.should have_css("div.photos div.photo", :count => 1)
+      end
+      
+      scenario 'deletes photo' do
+        photo = Factory(:photo, :page => @page)
+        visit('/pages/happy-easter/edit')
+        page.should have_css("div.photos div.photo", :count => 1)
+        within('div.photos') do
+          click_link('Delete')
+        end
+        page.should have_content('Photo was successfully destroyed.')
+        page.should have_no_css("div.photos div.photo")
+        expect { photo.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
   end
 end

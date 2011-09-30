@@ -14,11 +14,13 @@ gem 'jquery-rails'
 gem 'acts-as-taggable-on'
 gem 'devise'
 gem 'cancan'
+gem 'carrierwave'
 gem "html_truncator", "~>0.2"
 gem 'kaminari'
 gem 'userstamp'
 gem 'responders'
 gem 'redcarpet'
+gem 'rmagick'
 
 
 gem 'friendly_id', '3.3.0.alpha2'

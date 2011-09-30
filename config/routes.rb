@@ -1,12 +1,16 @@
 Emaxx::Application.routes.draw do
   
+  resources :photos
+
   devise_for :users
   
   resources :users, :only => [:index, :show, :edit, :update, :destroy]
   
   match '/tag/:tag' => 'pages#index', :as => :tag
 
-  resources :pages
+  resources :pages do
+    resources :photos, :only => [:create, :destroy]
+  end
   
   root :to => 'site#index' 
   

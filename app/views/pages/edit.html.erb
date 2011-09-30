@@ -2,5 +2,11 @@
 
 <%= render 'form' %>
 
+<%= render 'photos/form' %>
+
+<div class="photos">
+	<%= render @page.photos %>
+</div>
+
 <%= link_to 'Show', @page %> |
 <%= link_to 'Back', pages_path %>
