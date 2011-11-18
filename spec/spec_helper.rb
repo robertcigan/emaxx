@@ -53,6 +53,11 @@ Spork.prefork do
     config.infer_base_class_for_anonymous_controllers = false
 
     config.fixture_path = Rails.root.join("spec/fixtures")
+    
+    config.after do
+      FileUtils.rm_rf(File.join(Rails.root, 'tmp', 'uploads'))
+      FileUtils.rm_rf(File.join(Rails.root, 'public', 'test_uploads'))
+    end
   end
 end  
 
