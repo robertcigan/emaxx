@@ -1,32 +1,34 @@
-Factory.sequence :email do |n|
-  "user#{n}@example.com"
-end
+FactoryGirl.define do
+  sequence :email do |n|
+    "user#{n}@example.com"
+  end
 
-Factory.sequence :name do |n|
-  "User Name #{n}"
-end
+  sequence :name do |n|
+    "User Name #{n}"
+  end
 
-Factory.define :user do |f|
-  f.name { Factory.next(:name) }
-  f.email { Factory.next(:email) }
-  f.password 'secret'
-  f.password_confirmation { |u| u.password }
-end
+  factory :user do
+    name { Factory.next(:name) }
+    email { Factory.next(:email) }
+    password 'secret'
+    password_confirmation { |u| u.password }
+  end
 
-Factory.define :admin, :parent => :user do |f|
-  f.email 'admin@example.com'
-  f.admin true
-end
+  factory :admin, :parent => :user do
+    email 'admin@example.com'
+    admin true
+  end
 
-Factory.define :page do |f|
-  f.title 'Great news'
-  f.content 'This is a great post whatsoever'
-  f.publish_at '2010-01-01 8:00:00'
-  f.html_content 'This is a great post whatsoever'
-  f.tag_list 'news, worldwide'
-end
+  factory :page do
+    title 'Great news'
+    content 'This is a great post whatsoever'
+    publish_at '2010-01-01 8:00:00'
+    html_content 'This is a great post whatsoever'
+    tag_list 'news, worldwide'
+  end
 
-Factory.define :photo do |f|
-  f.association :page
-  f.file { File.open(File.join(Rails.root, 'spec', 'files', 'test_image.jpg')) }
+  factory :photo do
+    association :page
+    file { File.open(File.join(Rails.root, 'spec', 'files', 'test_image.jpg')) }
+  end
 end

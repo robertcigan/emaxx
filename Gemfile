@@ -1,13 +1,15 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.1.1'
 
 gem 'mysql2'
 
 # Asset template engines
-gem 'sass'
-gem 'coffee-script'
-gem 'uglifier'
+group :assets do
+  gem 'sass'
+  gem 'coffee-script'
+  gem 'uglifier'
+end
 
 gem 'jquery-rails'
 

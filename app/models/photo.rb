@@ -4,7 +4,7 @@ class Photo < ActiveRecord::Base
   
   validates :file, :presence => true
   
-  attr_protected :page_id
+  attr_accessible :file
   
   #one convenient method to pass jq_upload the necessary information
   def to_jq_upload
