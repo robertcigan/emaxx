@@ -2,4 +2,4 @@
 
 Is a open-source, free to use, free to modify, free to contribute, free to fork blogging application.
 
-Current master build status http://travis-ci.org/robertcigan/emaxx.png thanks to http://travis-ci.org guys <3
+Current master build status {<img src="http://travis-ci.org/robertcigan/emaxx.png" />}[http://travis-ci.org/robertcigan/emaxx] thanks to http://travis-ci.org guys <3
