@@ -158,7 +158,7 @@ feature "pages" do
       end
     end
     
-    context 'photos upload' do
+    context 'photos upload', :js => true do
       background do 
         @photo_path = File.join(Rails.root, 'spec', 'files', 'test_image.jpg')
       end
@@ -167,21 +167,18 @@ feature "pages" do
         visit('/pages/happy-easter/edit')
         within('form#new_photo') do
           attach_file('File', @photo_path)
-          click_button 'Create Photo'
         end
-        page.should have_content('Photo was successfully created.')
-        page.should have_css("div.photos div.photo", :count => 1)
+        page.should have_css("div#page_photos .photo", :count => 1)
       end
       
       scenario 'deletes photo' do
         photo = Factory(:photo, :page => @page)
         visit('/pages/happy-easter/edit')
-        page.should have_css("div.photos div.photo", :count => 1)
-        within('div.photos') do
+        page.should have_css("div#page_photos .photo", :count => 1)
+        within('div#page_photos') do
           click_link('Delete')
         end
-        page.should have_content('Photo was successfully destroyed.')
-        page.should have_no_css("div.photos div.photo")
+        page.should have_no_css("div#page_photos div.photo")
         expect { photo.reload }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
