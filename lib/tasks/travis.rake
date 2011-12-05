@@ -1,3 +1,4 @@
+desc "Custom rspec launcher to enable selenium tests on Travis CI worker"
 task :travis do
   ["rspec spec"].each do |cmd|
     puts "Starting to run #{cmd}..."
