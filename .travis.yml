@@ -15,8 +15,11 @@ rvm:
 #  - 1.8.6
 
 # Define how to run your tests (defaults to `bundle exec rake` or `rake` depending on whether you have a `Gemfile`)
-before_script: "cp config/database.example.yml config/database.yml"
-script: "bundle exec rake db:drop db:create db:migrate spec"    
+before_script: 
+  - "cp config/database.example.yml config/database.yml"
+  - "sh -e /etc/init.d/xvfb start"
+
+script: "bundle exec rake db:drop db:create db:migrate travis"
 
 # Define tasks to be completed before and after tests run . Will allow folding of content on frontend
 #before_script:
