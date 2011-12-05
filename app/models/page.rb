@@ -18,8 +18,8 @@ class Page < ActiveRecord::Base
   
   def generate_html
     if self.content_changed?
-      markdown = Redcarpet.new(self.content)
-      self.html_content = markdown.to_html
+      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+      self.html_content = markdown.render(self.content)
     end
   end
   
