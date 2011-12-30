@@ -2,5 +2,5 @@
 	<strong><%= link_to(page.title, page) %></strong>
 	<div class="preview"><%= raw page.preview %></div>
 	<%= page.publish_at %>
-	<%= link_to 'Edit', edit_page_path(page) if can? :edit, page%>
+	<%= link_to 'Edit', edit_page_path(page) if can? :edit, page %>
 </div>

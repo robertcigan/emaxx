@@ -19,7 +19,7 @@ gem 'redcarpet'
 gem 'rmagick'
 
 
-gem 'friendly_id', '3.3.0.alpha2'
+gem 'friendly_id', '>=4.0.0'
 
 # Asset template engines
 gem "coffee-rails", "~> 3.1.1"

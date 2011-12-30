@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110921214503) do
+ActiveRecord::Schema.define(:version => 20111230103542) do
 
   create_table "pages", :force => true do |t|
     t.string   "title"
@@ -22,9 +22,11 @@ ActiveRecord::Schema.define(:version => 20110921214503) do
     t.datetime "publish_at"
     t.text     "html_content"
     t.text     "preview"
+    t.string   "slug"
   end
 
   add_index "pages", ["cached_slug"], :name => "index_pages_on_cached_slug", :unique => true
+  add_index "pages", ["slug"], :name => "index_pages_on_slug"
 
   create_table "photos", :force => true do |t|
     t.integer  "page_id"
@@ -34,18 +36,6 @@ ActiveRecord::Schema.define(:version => 20110921214503) do
   end
 
   add_index "photos", ["page_id"], :name => "index_photos_on_page_id"
-
-  create_table "slugs", :force => true do |t|
-    t.string   "name"
-    t.integer  "sluggable_id"
-    t.integer  "sequence",                     :default => 1, :null => false
-    t.string   "sluggable_type", :limit => 40
-    t.string   "scope"
-    t.datetime "created_at"
-  end
-
-  add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
-  add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

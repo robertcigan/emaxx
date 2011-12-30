@@ -1,9 +1,8 @@
 class Page < ActiveRecord::Base
   acts_as_taggable_on :tags
-  has_friendly_id :title, 
-    :use_slug => true, 
-    :approximate_ascii => true, 
-    :max_length => 50, 
+  extend FriendlyId  
+  friendly_id :title, 
+    :use => [:slugged, :reserved], 
     :reserved_words => ["index", "new", "edit", "create", "page", "destroy", "update", "show"]
     
   has_many :photos, :dependent => :destroy

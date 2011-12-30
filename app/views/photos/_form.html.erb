@@ -1,6 +1,6 @@
 <%= form_for([@page, @photo ||= Photo.new], :html => { :multipart => true }) do |f| %>
   <div class="field">
     <%= f.label :file %><br />
-    <%= f.file_field :file %>
+    <%= f.file_field :file, :name => 'photo[file]', :multiple => true %>
   </div>
 <% end %>
